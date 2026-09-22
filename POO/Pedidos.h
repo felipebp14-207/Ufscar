@@ -1,33 +1,31 @@
-#ifndef PEDIDOS_H
-#define PEDIDOS_H
+#ifndef PROJETO_H
+#define PROJETO_H
+
 #include <string>
 
 class Pedido{
+    static int quantItens;
     static int ativos;
-    static int quantidadeItens;
     static int nSequencial;
-
     const int sequencial;
-    const std::string nome;
-    const int quantidade;
+    std::string nome;
+    int quantidade;
     std::string *itens;
 
 public:
     Pedido(std::string, int);
-    Pedido(const Pedido &);
+    Pedido(const Pedido&);
     ~Pedido();
 
-    bool setItem(int, std::string);
+    bool setItem(std::string, int);
 
-    int getSequencial() const;
     std::string getNome() const;
     int getQuantidade() const;
     std::string getItem(int) const;
-
+    int getSequencial() const;
+    static int getnSequencial();
     static int getAtivos();
-    static int getQuantidadeItens();
-    static int getNumSequencial();
+    static int quantidadeItens();
 };
-
 
 #endif
