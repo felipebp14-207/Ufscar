@@ -53,3 +53,11 @@ Fracao Fracao::operator*(const Fracao F2)
     resultado.set_denominador(this->get_denominador()*F2.get_denominador());
     return resultado;
 }
+
+Fracao Fracao::operator*(int num)
+{
+    Fracao resultado;
+    resultado.set_numerador(this->get_numerador()*num);
+    resultado.set_denominador(this->get_denominador());
+    return resultado;
+}

@@ -12,6 +12,7 @@ public:
     int get_numerador() const;
     int get_denominador() const;
     Fracao operator*(const Fracao);
+    Fracao operator*(int);
     void print() const;
 };
 #endif
