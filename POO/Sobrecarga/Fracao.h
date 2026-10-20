@@ -20,5 +20,6 @@ public:
     bool operator<(const Fracao&) const;
 
     friend Fracao operator*(int, const Fracao);
+    friend ostream &operator<<(ostream&, const Fracao&);
 };
 #endif

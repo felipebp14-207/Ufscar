@@ -95,3 +95,9 @@ Fracao operator*(int num, const Fracao F1)
 {
     return Fracao(F1.numerador * num, F1.denominador);
 }
+
+ostream &operator<<(ostream &saida, const Fracao &f)
+{
+    saida << f.numerador << "/" << f.denominador;
+    return saida;
+}

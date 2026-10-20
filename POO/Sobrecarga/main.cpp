@@ -65,5 +65,7 @@ int main()
 
     cout << (F1<F2) << endl;
 
+    cout << F1 << endl;
+
     return 0;
 }
