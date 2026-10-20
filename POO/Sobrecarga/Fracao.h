@@ -1,5 +1,8 @@
 #ifndef FRACAO_H
 #define FRACAO_H
+#include <iostream>
+#include <iomanip>
+using namespace std;
 
 class Fracao{
     int numerador;
@@ -15,11 +18,21 @@ public:
 
     Fracao operator*(const Fracao);
     Fracao operator*(int);
+    friend Fracao operator*(int, const Fracao);
+
+    Fracao operator-(const Fracao&);
+    Fracao operator-(const int&);
+    friend Fracao operator-(const int&, const Fracao&);
+
     Fracao & operator++();
     Fracao operator++(int);
+    
     bool operator<(const Fracao&) const;
 
-    friend Fracao operator*(int, const Fracao);
     friend ostream &operator<<(ostream&, const Fracao&);
+    friend istream &operator>>(istrean&, Fracao&);
+
+    Fracao & operator--();
+    Fracao operator--(int);
 };
 #endif

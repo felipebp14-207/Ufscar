@@ -46,6 +46,8 @@ void Fracao::print() const
     std::cout << "Denominador: " << get_denominador() << std::endl << std::endl;
 }
 
+//Implementação do operador *
+
 Fracao Fracao::operator*(const Fracao F2)
 {
     Fracao resultado;
@@ -62,6 +64,13 @@ Fracao Fracao::operator*(int num)
     return resultado;
 }
 
+Fracao operator*(int num, const Fracao F1)
+{
+    return Fracao(F1.numerador * num, F1.denominador);
+}
+
+//Implementação do operador ++(pré e pós-fixado)
+
 Fracao & Fracao::operator++()
 {
     set_numerador(get_numerador()+get_denominador());
@@ -74,6 +83,8 @@ Fracao Fracao::operator++(int inutil)
     this->set_numerador(this->get_numerador() + this->get_denominador());
     return antigo;
 }
+
+//Implementação do operador <
 
 bool Fracao::operator<(const Fracao &F2) const
 {
@@ -91,13 +102,60 @@ bool Fracao::operator<(const Fracao &F2) const
     return false;
 }
 
-Fracao operator*(int num, const Fracao F1)
-{
-    return Fracao(F1.numerador * num, F1.denominador);
-}
+
+//Implementação das operações de entrada e saída de dados
 
 ostream &operator<<(ostream &saida, const Fracao &f)
 {
     saida << f.numerador << "/" << f.denominador;
     return saida;
 }
+
+istream &operator>>(istream &entrada, Fracao &f)
+{
+    entrada >> setw(1) >> f.numerador;
+    entrada.ignore();
+    entrada >> setw(1) >> f.denominador;
+    return entrada;
+}
+
+//Implementação da operação -.
+
+Fracao Fracao::operator-(const Fracao &f2)
+{
+    Fracao resultado = *this;
+
+    if(resultado.get_denominador() == f2.get_denominador())
+    {
+        resultado.set_numerador(this->get_numerador()-f2.get_numerador());
+    }
+    else
+    {
+        Fracao aux = f2;
+
+        resultado.set_denominador(this->get_denominador()*f2.get_denominador());
+        resultado.set_numerador(this->get_numerador()*f2.get_denominador());
+        aux.set_numerador(f2.get_numerador() * this->get_denominador());
+        resultado.set_numerador(resultado.get_numerador() - aux.get_numerador());
+    }
+
+    return resultado;
+}
+
+Fracao Fracao::operator-(const int &num)
+{
+    Fracao aux(num*this->get_denominador(), this->get_denominador());
+    Fracao resultado(this->get_numerador()-aux.get_numerador(), this->get_denominador());
+    return resultado;
+}
+
+Fracao operator-(const int &num, const Fracao &f)
+{
+    Fracao aux(num*f.get_denominador(), f.get_denominador());
+    Fracao resultado(aux.get_numerador()-f.get_numerador(), f.get_denominador());
+    return resultado;
+}
+
+//Implementação do operador --(pré e pós-fixado)
+
+Fra
