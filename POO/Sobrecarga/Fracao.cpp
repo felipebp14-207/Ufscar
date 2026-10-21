@@ -22,10 +22,16 @@ void Fracao::set_denominador(int den)
 {
     if(den == 0)
     {
+        cout << "Denominador Invalido! (Alterado para 1)" << endl;
         denominador = 1;
     }
     else
     {
+        if(den < 0)
+        {
+            set_numerador(-this->get_numerador());
+            denominador = -den;
+        }
         denominador = den;
     }
 }
@@ -86,20 +92,25 @@ Fracao Fracao::operator++(int inutil)
 
 //Implementação do operador <
 
-bool Fracao::operator<(const Fracao &F2) const
+bool Fracao::operator<(const Fracao &f2) const
 {
-    Fracao aux1 = *this;
-    Fracao aux2 = F2;
+    long long a = 1LL * numerador * f2.denominador;
+    long long b = 1LL * f2.numerador * denominador;
 
-    aux1.set_numerador(aux1.get_numerador()*aux2.get_denominador());
+    if ((denominador < 0) != (f2.denominador < 0))
+        return a > b;
 
-    aux2.set_numerador(aux2.get_numerador()*aux1.get_denominador());
+    return a < b;
+}
 
-    if(aux1.get_numerador() < aux2.get_numerador())
-    {
-        return true;
-    }
-    return false;
+bool Fracao::operator<(int num) const
+{
+    return (*this < Fracao(num, 1));
+}
+
+bool operator<(int num, const Fracao &f1)
+{
+    return (Fracao(num, 1) < f1);
 }
 
 
@@ -113,12 +124,24 @@ ostream &operator<<(ostream &saida, const Fracao &f)
 
 istream &operator>>(istream &entrada, Fracao &f)
 {
-    entrada >> setw(1) >> f.numerador;
-    entrada.ignore();
-    entrada >> setw(1) >> f.denominador;
+    int num, den;
+    char barra;
+
+    if (entrada >> num >> barra >> den)
+    {
+        if (barra == '/' && den != 0)
+        {
+            f.set_numerador(num);
+            f.set_denominador(den);
+        }
+        else
+        {
+            entrada.setstate(ios::failbit);
+        }
+    }
+
     return entrada;
 }
-
 //Implementação da operação -.
 
 Fracao Fracao::operator-(const Fracao &f2)
@@ -158,4 +181,107 @@ Fracao operator-(const int &num, const Fracao &f)
 
 //Implementação do operador --(pré e pós-fixado)
 
-Fra
+Fracao &Fracao::operator--()
+{
+    set_numerador(this->get_numerador()-this->get_denominador());
+    return *this;
+}
+
+Fracao Fracao::operator--(int inutil)
+{
+    Fracao antigo = *this;
+    this->set_numerador(this->get_numerador()-this->get_denominador());
+    return antigo;
+}
+
+//Implementação do operador >
+
+bool Fracao::operator>(const Fracao &f2) const
+{
+    return (f2 < *this);
+}
+
+bool Fracao::operator>(int num) const
+{
+    return (Fracao(num, 1) < *this);
+}
+
+bool operator>(int num, const Fracao &f1)
+{
+    return (f1 < num);
+}
+
+//Implementação do operador ==
+
+bool Fracao::operator==(const Fracao &f2) const
+{
+    long long a1 = 1LL * this->get_numerador() * f2.get_denominador();
+    long long a2 = 1LL * f2.get_numerador() * this->get_denominador();
+
+    if(a1 == a2)
+    {
+        return true;
+    }
+    return false;
+}
+
+bool Fracao::operator==(int num) const
+{
+    return (*this == Fracao(num, 1));
+}
+
+bool operator==(int num, const Fracao &f1)
+{
+    return (Fracao(num, 1) == f1);
+}
+
+//Implementação do operador <=
+
+bool Fracao::operator<=(const Fracao &f2) const
+{
+    return ((*this < f2) || (*this == f2));
+}
+
+bool Fracao::operator<=(int num) const
+{
+    return ((*this < num) || (*this == num));
+}
+
+bool operator<=(int num, const Fracao &f1)
+{
+    return ((num < f1) || (num == f1));
+}
+
+//Implementação do operador >=
+
+bool Fracao::operator>=(const Fracao &f2) const
+{
+    return ((*this > f2) || (*this == f2));
+}
+
+bool Fracao::operator>=(int num) const
+{
+    return ((*this > num) || (*this == num));
+}
+
+bool operator>=(int num, const Fracao &f1)
+{
+    return ((num > f1) || (num == f1));
+}
+
+//Implementação do operador !=
+
+bool Fracao::operator!=(const Fracao &f2) const
+{
+    return !(*this == f2);
+}
+
+bool Fracao::operator!=(int num) const
+{
+    return !(*this == num);
+}
+
+bool operator!=(int num, const Fracao &f1)
+{
+    return !(num == f1);
+}

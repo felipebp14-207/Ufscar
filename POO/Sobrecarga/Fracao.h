@@ -28,11 +28,33 @@ public:
     Fracao operator++(int);
     
     bool operator<(const Fracao&) const;
+    bool operator<(int) const;
+    friend bool operator<(int, const Fracao&);
 
     friend ostream &operator<<(ostream&, const Fracao&);
-    friend istream &operator>>(istrean&, Fracao&);
+    friend istream &operator>>(istream&, Fracao&);
 
     Fracao & operator--();
     Fracao operator--(int);
+
+    bool operator>(const Fracao&) const;
+    bool operator>(int) const;
+    friend bool operator>(int, const Fracao&);
+
+    bool operator==(const Fracao&) const;
+    bool operator==(int) const;
+    friend bool operator==(int, const Fracao&);
+
+    bool operator<=(const Fracao&) const;
+    bool operator<=(int) const;
+    friend bool operator<=(int, const Fracao&);
+
+    bool operator>=(const Fracao&) const;
+    bool operator>=(int) const;
+    friend bool operator>=(int, const Fracao&);
+
+    bool operator!=(const Fracao&) const;
+    bool operator!=(int) const;
+    friend bool operator!=(int, const Fracao&);
 };
 #endif
