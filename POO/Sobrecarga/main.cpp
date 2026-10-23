@@ -1,71 +1,83 @@
-#include <iostream>
+
 #include "Fracao.h"
+#include <iostream>
 using namespace std;
-
-/*Fracao operator*(Fracao F1, int num)
-{
-    Fracao resultado;
-    resultado.set_numerador(F1.get_numerador()*num);
-    resultado.set_denominador(F1.get_denominador());
-    return resultado;
-}*/
-
-/*Fracao operator*(int num, Fracao F1)
-{
-    return F1 * num;
-}*/
 
 int main()
 {
-    Fracao F1;
-    Fracao F2(2, 3);
+    // Declaração das variáveis para testes
+    Fracao f1(1, 2);
+    Fracao f2(4, 2);
 
-    F1.print();
-    F2.print();
+    // Uso do operador >> e <<
+    Fracao f3;
+    cout << "Digite uma fracao (ex: 2/3): ";
+    cin >> f3;
 
-    F1.set_denominador(0);
-    F1.set_numerador(4);
+    // Uso do operador <<
+    cout << "f1 = " << f1 << endl;
+    cout << "f2 = " << f2 << endl;
+    cout << "f3 = " << f3 << endl;
 
-    F1.print();
+    // Uso do operador +
+    Fracao f4 = f1 + f2;  // Fracao + Fracao
+    f1 = f1 + 1;          // Fracao + int
+    f3 = 3 + f3;          // int + Fracao
 
-    Fracao F3;
-    F3 = F1 * F2;
-    F3.print();
+    // Uso do operador -
+    f4 = f4 - f1;         // Fracao - Fracao
+    f2 = f2 - 1;          // Fracao - int
+    f3 = 2 - f3;          // int - Fracao
 
-    Fracao F4;
-    F4 = F2 * 2;
-    F4.print();
+    // Uso do operador *
+    f4 = f1 * f2;         // Fracao * Fracao
+    f1 = f1 * 2;          // Fracao * int
+    f3 = 3 * f3;          // int * Fracao
 
-    F4 = 2 * F4;
-    F4.print();
+    // Uso do operador ++
+    ++f1;                 // Pre-incremento
+    f2++;                 // Pos-incremento
 
-    Fracao F5(1,5);
-    F3 = ++F5;
-    F3.print();
+    // Uso do operador --
+    --f1;                 // Pre-decremento
+    f2--;                 // Pos-decremento
 
-    cout << "Fracao 5:" << endl;
-    F5.print();
+    // Uso do operador <
+    cout << (f1 < f2) << endl;  // Fracao < Fracao
+    cout << (f1 < 2) << endl;   // Fracao < int
+    cout << (2 < f1) << endl;   // int < Fracao
 
-    Fracao F6(1,5);
-    F4 = F6++;
-    F4.print();
+    // Uso do operador >
+    cout << (f1 > f2) << endl;  // Fracao > Fracao
+    cout << (f1 > 2) << endl;   // Fracao > int
+    cout << (2 > f1) << endl;   // int > Fracao
 
-    cout << "Fracao 6:" << endl;
-    F6.print();
+    // Uso do operador ==
+    cout << (f1 == f2) << endl; // Fracao == Fracao
+    cout << (f1 == 2) << endl;  // Fracao == int
+    cout << (2 == f1) << endl;  // int == Fracao
 
-    /*F1.set_numerador(1);
-    F1.set_denominador(2);
+    // Uso do operador !=
+    cout << (f1 != f2) << endl; // Fracao != Fracao
+    cout << (f1 != 2) << endl;  // Fracao != int
+    cout << (2 != f1) << endl;  // int != Fracao
 
-    F2.set_numerador(3);
-    F2.set_denominador(2);*/
-    F1.print();
-    F2.print();
+    // Uso do operador <=
+    cout << (f1 <= f2) << endl; // Fracao <= Fracao
+    cout << (f1 <= 2) << endl;  // Fracao <= int
+    cout << (2 <= f1) << endl;  // int <= Fracao
 
-    //bool menor = F1<F2;
+    // Uso do operador >=
+    cout << (f1 >= f2) << endl; // Fracao >= Fracao
+    cout << (f1 >= 2) << endl;  // Fracao >= int
+    cout << (2 >= f1) << endl;  // int >= Fracao
 
-    cout << (F1<F2) << endl;
-
-    cout << F1 << endl;
+    // Exibição dos valores finais
+    cout << "\nValores finais:" << endl;
+    cout << "f1 = " << f1 << endl;
+    cout << "f2 = " << f2 << endl;
+    cout << "f3 = " << f3 << endl;
+    cout << "f4 = " << f4 << endl;
 
     return 0;
 }

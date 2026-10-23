@@ -1,7 +1,6 @@
 #ifndef FRACAO_H
 #define FRACAO_H
 #include <iostream>
-#include <iomanip>
 using namespace std;
 
 class Fracao{
@@ -16,12 +15,12 @@ public:
     int get_denominador() const;
     void print() const;
 
-    Fracao operator*(const Fracao);
-    Fracao operator*(int);
-    friend Fracao operator*(int, const Fracao);
+    Fracao operator*(const Fracao&) const;
+    Fracao operator*(int) const;
+    friend Fracao operator*(int, const Fracao&);
 
-    Fracao operator-(const Fracao&);
-    Fracao operator-(const int&);
+    Fracao operator-(const Fracao&) const;
+    Fracao operator-(const int&) const;
     friend Fracao operator-(const int&, const Fracao&);
 
     Fracao & operator++();
@@ -56,5 +55,9 @@ public:
     bool operator!=(const Fracao&) const;
     bool operator!=(int) const;
     friend bool operator!=(int, const Fracao&);
+
+    Fracao operator+(const Fracao&) const;
+    Fracao operator+(int) const;
+    friend Fracao operator+(int, const Fracao&);
 };
 #endif

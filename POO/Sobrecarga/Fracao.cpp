@@ -54,7 +54,7 @@ void Fracao::print() const
 
 //Implementação do operador *
 
-Fracao Fracao::operator*(const Fracao F2)
+Fracao Fracao::operator*(const Fracao &F2) const
 {
     Fracao resultado;
     resultado.set_numerador(this->get_numerador()*F2.get_numerador());
@@ -62,7 +62,7 @@ Fracao Fracao::operator*(const Fracao F2)
     return resultado;
 }
 
-Fracao Fracao::operator*(int num)
+Fracao Fracao::operator*(int num) const
 {
     Fracao resultado;
     resultado.set_numerador(this->get_numerador()*num);
@@ -70,7 +70,7 @@ Fracao Fracao::operator*(int num)
     return resultado;
 }
 
-Fracao operator*(int num, const Fracao F1)
+Fracao operator*(int num, const Fracao &F1)
 {
     return Fracao(F1.numerador * num, F1.denominador);
 }
@@ -144,7 +144,7 @@ istream &operator>>(istream &entrada, Fracao &f)
 }
 //Implementação da operação -.
 
-Fracao Fracao::operator-(const Fracao &f2)
+Fracao Fracao::operator-(const Fracao &f2) const
 {
     Fracao resultado = *this;
 
@@ -165,7 +165,7 @@ Fracao Fracao::operator-(const Fracao &f2)
     return resultado;
 }
 
-Fracao Fracao::operator-(const int &num)
+Fracao Fracao::operator-(const int &num) const
 {
     Fracao aux(num*this->get_denominador(), this->get_denominador());
     Fracao resultado(this->get_numerador()-aux.get_numerador(), this->get_denominador());
@@ -284,4 +284,31 @@ bool Fracao::operator!=(int num) const
 bool operator!=(int num, const Fracao &f1)
 {
     return !(num == f1);
+}
+
+//Implementação operador +
+
+Fracao Fracao::operator+(const Fracao &f2) const
+{
+    if(this->get_denominador() == f2.get_denominador())
+    {
+        return Fracao((this->get_numerador()+f2.get_numerador()), this->get_denominador());
+    }
+
+    Fracao resultado = *this;
+    int aux = (this->get_denominador()*f2.get_numerador());
+
+    resultado.set_numerador(this->get_numerador()*f2.get_denominador()+aux);
+    resultado.set_denominador(this->get_denominador()*f2.get_denominador());
+    return resultado;
+}
+
+Fracao Fracao::operator+(int num) const
+{
+    return (*this + Fracao(num, 1));
+}
+
+Fracao operator+(int num, const Fracao &f1)
+{
+    return (f1 + num);
 }
