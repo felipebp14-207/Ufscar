@@ -1,51 +1,24 @@
 #include <iostream>
+#include "Vetor.h"
 using namespace std;
-
-template <typename T>
-
-void printArray(const T* Ptr, const int tam)
-{
-    cout << endl;
-    for(int i = 0; i < tam; i++)
-    {
-        cout << "Elemento " << i+1 << ": " << Ptr[i] << endl;
-    }
-    cout << endl;
-}
 
 int main()
 {
-    int tamanhoI, tamanhoC;
+    Vetor <int> pares;
 
-    cout << "Digite o tamanho do array de inteiros:" << endl;
-    cin >> tamanhoI;
-
-    int *ptr = new int[tamanhoI];
-
-    for(int i = 0; i < tamanhoI; i++)
+    int i = 0;
+    while(pares.set_elemento(i, i*2))
     {
-        cout << "Digite o inteiro " << i+1 << ":" << endl;
-        cin >> ptr[i];
+        i++;
     }
 
-    printArray(ptr, tamanhoI);
-
-    delete [] ptr;
-
-    cout << "Digite o tamanho do array de caracteres:" << endl;
-    cin >> tamanhoC;
-
-    char *PtrC = new char[tamanhoC];
-
-    for(int i = 0; i < tamanhoC; i++)
+    i = 0;
+    int aux;
+    while(pares.get_elemento(i, aux))
     {
-        cout << "Digite o caracter " << i+1 << ":" << endl;
-        cin >> PtrC[i];
+        cout << "Elemento " << i << ": " << aux << endl;
+        i++;
     }
-
-    printArray(PtrC, tamanhoC);
-
-    delete [] PtrC;
-
+    
     return 0;
 }
